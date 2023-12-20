@@ -1,0 +1,27 @@
+import java_cup.runtime.*;
+
+terminal PTVIRG, VIRGULA, IMC, IAC, IGUAL;
+terminal Integer INTEIRO;
+terminal Double FLUTUANTE;
+
+non terminal Object expr_list;
+non terminal Object expr, calc, expr_ptv;
+
+expr_list ::= expr_list expr_ptv
+          | expr_ptv;
+
+expr_ptv  ::= calc PTVIRG;
+
+expr ::= IGUAL INTEIRO:v1 VIRGULA FLUTUANTE:v2 VIRGULA FLUTUANTE:v3
+        {:
+          Calculos calc = new Calculos(v1, v2, v3);
+          RESULT = calc;
+        :};
+calc ::= IMC expr:e {: 
+            Calculos calc = (Calculos) e;
+            System.out.println(calc.imc());
+        :} 
+        | IAC expr:e {: 
+            Calculos calc = (Calculos) e;
+            System.out.println(calc.iac());
+        :};
