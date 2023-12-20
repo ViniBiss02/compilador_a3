@@ -1,4 +1,6 @@
 # Calculadora IMC e IAC
 
-ordem executavel 
+
+ordem executavel:
+
 geraflex > compila > executa
